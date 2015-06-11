@@ -50,11 +50,11 @@ SETUP
 void setup()
 {  
   // open serial port
-  openserial();   
+//  openserial();   
    
   delay(5000);                  // waits for 5 second
-    Serial.println("opening keyboard");
-    Serial.println("keyboard open");
+//    Serial.println("opening keyboard");
+//    Serial.println("keyboard open");
 }
 
 /*
@@ -85,26 +85,26 @@ if (keyboard_leds & (1<<USB_LED_CAPS_LOCK))
     capslockPushCounter++;
 	}
     // CapsLock is ON - put your "on" code here
-    Serial.println("CAPS ON");
+//    Serial.println("CAPS ON");
 }
 else
 {
     // CapsLock is OFF - put your "off" code here
-    Serial.println("CAPS OFF");
+//    Serial.println("CAPS OFF");
 	capslockState = 0;
 }
 
-	if (capslockPushCounter == 4 && capslockState == 0)
+	if (capslockPushCounter == 2 && capslockState == 0)
 	{
 		opennotepad();
 		capslockPushCounter = 0;
 	}	      
 lastcapslockState = capslockState;
 
-Serial.println(capslockState);
+/*Serial.println(capslockState);
 Serial.println(lastcapslockState);
 Serial.println(capslockPushCounter);
-
+*/
 delay(1000);
 }
 
@@ -129,6 +129,7 @@ Open NotePAD
 */
 void opennotepad()
 {
+Keyboard.begin();
 Keyboard.press(KEY_LEFT_GUI);
 Keyboard.press('r');
 Keyboard.releaseAll();
@@ -141,9 +142,9 @@ Keyboard.press(KEY_RETURN);
 Keyboard.releaseAll();
 delay(750);
 
-Keyboard.print("Hello World!!!");
+Keyboard.println("Hello");
     
 Keyboard.press(KEY_RETURN);
 Keyboard.releaseAll();
-
+Keyboard.end();
 }  
